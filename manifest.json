@@ -4,7 +4,7 @@
     "name": "Bird Neighbors in Prospect Park",
     "short_name": "Bird Neighbors",
     "description": "An interactive bird map for prospect park",
-    "start_url": "./",
+    "start_url": "index.html",
     "background_color": "rgb(255,192,203)",
     "theme-color": "#c8c8c8",
     "display": "fullscreen",
