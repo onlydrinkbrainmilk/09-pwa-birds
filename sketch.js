@@ -28,6 +28,8 @@ function shuffleArray(array) {
 
 // Listen for the mouse click within the PIXI canvas
 app.view.addEventListener('click', (event) => {
+
+    
   // console.log('app click event', event)
   console.log(event.clientX, event.clientY);
   shuffleArray(textures);
@@ -67,3 +69,54 @@ character.on('pointertap', () => {
 app.ticker.add(() => {
     character.rotation += 0.02;
 });
+
+
+const audioBuffers = [];
+const audioContext = new AudioContext();
+// Array of sound file paths
+const soundFiles = [
+  './images/chirp1.mp3',
+  './images/chirp2.mp3',
+  './images/chirp3.mp3'
+  // Add more sound file paths as needed
+];
+
+// Function to preload sound files
+function loadSound(url) {
+    return fetch(url)
+      .then((response) => response.arrayBuffer())
+      .then((buffer) => audioContext.decodeAudioData(buffer));
+  }
+  
+  // Preload all sound files and store them in an array of audio buffers
+  
+  Promise.all(soundFiles.map(loadSound))
+    .then((buffers) => {
+      audioBuffers.push(...buffers);
+  
+      // Listen for the mouse click within the PIXI canvas
+      app.view.addEventListener('click', () => {
+        // Get a random sound buffer from the loaded array
+        const randomSoundBuffer = audioBuffers[Math.floor(Math.random() * audioBuffers.length)];
+  
+        if (randomSoundBuffer) {
+          const source = audioContext.createBufferSource();
+          source.buffer = randomSoundBuffer;
+          source.connect(audioContext.destination);
+          source.start(0);
+        }
+        // Rest of your click event handling code...
+      });
+    })
+    .catch((error) => {
+      console.error('Error loading sound files:', error);
+    });
+// app.view.addEventListener('click', () => {
+//   if (audioBuffer) {
+//     const source = audioContext.createBufferSource();
+//     source.buffer = audioBuffer;
+//     source.connect(audioContext.destination);
+//     source.start(0);
+//   }
+
+// });
