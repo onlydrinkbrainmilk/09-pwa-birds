@@ -1,15 +1,17 @@
-Project Name:
+##Project Name:
 Bird Neighbors
 
-Overview:
+##Overview:
 Participants can interactive by clicking. A bird will appear when they click. All the birds can be found in Prospect Park. 
 
-Problems Encountered:
+##Problems Encountered:
 - pixi.js beta version appendChild not working (solved)
 - can not add mouse position tracking (solved)
 - can not play the audio files (unsolved)
 
-Credits:
+##Credits:
 https://ny.audubon.org/prospectpark
+https://brooklynbirdclub.org/birding-prospect-park/
+
 
 All the bird icons are hand drawn. 
